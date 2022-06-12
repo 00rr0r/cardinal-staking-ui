@@ -679,7 +679,7 @@ function Home() {
                             rewards.data?.claimableRewards,
                             6
                           )}{' '}
-                          {rewardMintInfo.data.tokenListData?.name ?? '???'}
+                          {rewardMintInfo.data.tokenListData?.name ?? '$0R0R'}
                         </div>
                         <div className="text-xs text-gray-500">
                           {rewardDistributorData.data.parsed.kind ===
