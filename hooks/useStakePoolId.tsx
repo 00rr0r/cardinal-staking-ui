@@ -13,7 +13,7 @@ export const useStakePoolId = () => {
   const publicKey =
     nameMapping?.stakePoolAddress ||
     addressMapping?.stakePoolAddress ||
-    tryPublicKey(stakePoolId)
+    tryPublicKey('4RMzeQMV8Dnbb3p3EH8UoF6GaK1PSU3FbJUQi1zbiSR3')
 
   return publicKey
 }

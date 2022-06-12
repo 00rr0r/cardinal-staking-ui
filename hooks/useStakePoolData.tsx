@@ -6,7 +6,7 @@ import { getStakePool } from '@cardinal/staking/dist/cjs/programs/stakePool/acco
 import { useQuery } from 'react-query'
 
 export const useStakePoolData = () => {
-  const stakePoolId = useStakePoolId()
+  const stakePoolId = (useStakePoolId())
   const { secondaryConnection } = useEnvironmentCtx()
 
   return useQuery<AccountData<StakePoolData> | undefined>(
