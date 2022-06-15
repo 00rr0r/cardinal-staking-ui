@@ -56,8 +56,8 @@ export const Footer = ({
             >
               Stake
             </a>
-            <a href="https://twitter.com/00RR0R.com" className="text-gray-400">
-              Twitter
+            <a href="https://shop.00RR0R.com" className="text-gray-400">
+              Shop
             </a>
             {/*<a href="" className="text-gray-400">
               Privacy
