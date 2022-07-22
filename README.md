@@ -9,10 +9,10 @@ For questions or technical help, join our **[Discord](https://discord.gg/stX2FAY
 ---
 
 <div style="text-align: center; width: 100%;">
-  <img style="height: 450px" src="./images/staking.gif" />
+  <img style="height: 450px" src="./images/staking.png" />
 </div>
 
-### Installation
+## Installation
 
 To get started, clone the repo and run:
 
@@ -28,7 +28,7 @@ yarn run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the staking interface running locally.
 
-### Set your Cluster
+## Set your Cluster
 
 To access different clusters in the scaffold, set the `cluster` query parameter in the URL:
 
@@ -38,7 +38,7 @@ To access different clusters in the scaffold, set the `cluster` query parameter 
 
 The default cluster set is **mainnet**. It's recommended to ensure you have `?cluster=devnet` while testing out functionality.
 
-### Create a Stake Pool
+## Create a Stake Pool
 
 To create a stake pool, navigate to the admin page located at http://localhost:3000/admin. This page hosts a form to create a stake pool with various configurations.
 
@@ -93,15 +93,33 @@ export type StakePoolMetadata = {
   stakePoolAddress: PublicKey
   // Default receipt type. Setting this will remove the option for the user to choose which receipt type to use
   receiptType?: ReceiptType
+  // Default empty. Setting this will tell the UI to only show tokens of that standard. Supports fungible or non-fungible
+  tokenStandard?: TokenStandard
+  // Optional config to hide this pool from the main page
+  hidden?: boolean
+  // Optional config to disable finding this pool
+  notFound?: boolean
+  // Optional hostname to remap -- SEE NOTE BELOW
+  hostname?: string
+  // Optional config to link redirect to page when you click on this pool
+  redirect?: string
+  // Hide allowed tokens style
+  hideAllowedTokens?: boolean
+  // styles to apply to the whole stake pool
+  styles?: CSSProperties
   // Colors object to style the stake page
   colors?: {
     primary: string
     secondary: string
     accent?: string
     fontColor?: string
+    fontColorSecondary?: string
+    backgroundSecondary?: string
   }
   // Image url to be used as the icon in the pool selector and the header
   imageUrl?: string
+  // Background banner image for pool
+  backgroundBannerImageUrl?: string
   // Website url if specified will be navigated to when the image in the header is clicked
   websiteUrl?: string
   // Max staked is used to compute percentage of total staked
@@ -110,6 +128,8 @@ export type StakePoolMetadata = {
   links?: { text: string; value: string }[]
   // On devnet when you click the airdrop button on this page it will clone NFTs with this metadata and airdrop to the user
   airdrops?: AirdropMetadata[]
+  // Analytics to show at the top of stake pool. supports trait based analytics and overall tokens data
+  analytics?: Analytic[]
 }
 ```
 
@@ -117,7 +137,19 @@ In `api/mapping.ts`, add your own object to the stakePoolMetadatas array. You'll
 
 In order to get a custom Cardinal URL, **deploy your pool** on mainnet and then **make a PR** to our `api/mapping.ts` file in this repo with updates containing your pool's metadata.
 
-### Deployment and Beyond
+## Custom hostname
+
+For a custom hostname...
+
+1. Add the mapping of your hostname to pool name in `next.config.js`
+2. Open a PR to this repo with that change
+3. Set the following record on your DNS provider to continue:
+```
+Type NAME CNAME
+CNAME {your subdomain} cname.vercel-dns.com
+```
+
+## Deployment and Beyond
 
 Now that you've made and deployed your Cardinal stake pool, you can either stick with Cardinal's UX for the stake pool experience or build your own.
 
